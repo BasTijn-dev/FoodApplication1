@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FoodAplication.Infrastructure.Configuration;
 using FoodApplication.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FoodAplication.Infrastructure.Configuration
+public class DeliverySystemConfig : BaseConfig<DeliverySystem>
 {
-    public class DeliverySystemConfig : BaseConfig<FoodApplication.Domain.Entities.DeliverySystem>
+    public override void Configure(EntityTypeBuilder<DeliverySystem> builder)
     {
-        public override void Configure(EntityTypeBuilder<DeliverySystem> builder)
-        {
+        base.Configure(builder);
 
-            base.Configure(builder);
-            builder.Property(d => d.DispatchRiderName).IsRequired().HasMaxLength(100);
-            builder.Property(d => d.DeliveryDate).IsRequired();
-            builder.Property(d => d.Status).IsRequired().HasMaxLength(50);
-            builder.HasOne(d => d.FoodOrders)
-                .WithMany()
-                .HasForeignKey("OrderId")
-                .OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade);
-        }
+        builder.Property(d => d.DispatchRiderName).IsRequired().HasMaxLength(100);
+        builder.Property(d => d.Status).IsRequired().HasMaxLength(50);
+        builder.Property(d => d.DeliveryDate).IsRequired();
+
+        builder.HasOne(d => d.Order)
+               .WithOne(o => o.DeliverySystem)
+               .HasForeignKey<DeliverySystem>(d => d.OrderId);
     }
 }
+
+

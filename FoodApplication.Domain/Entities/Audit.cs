@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 namespace FoodApplication.Domain.Entities
 {
-    public class Audit
+    public abstract class Audit
     {
-        public long Id { get; set; }
+        public Guid Id { get; set; }               // Primary Key
+        public DateTime CreatedOn { get; set; }    // Auto-set on insert
+        public bool IsDeleted { get; set; }         // Soft delete flag
+        public DateTime? ModifiedOn { get; set; }
         public string? CreatedBy { get; set; }
-        public DateTime CreatedOn { get; set; } = DateTime.Now;
-        public long? LastModifiedBy { get; set; }
-        public DateTime? LastModifiedOn { get; set; }
-        public bool IsDelete { get; set; }
+
     }
+
 }

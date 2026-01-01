@@ -1,33 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FoodApplication.Domain.Entities;
+﻿using FoodApplication.Domain.Entities;
+using FoodApplication.Domain.Entities.FoodApplication.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace FoodAplication.Infrastructure.DbContexts;
 
+public class FoodApplicationDbContext : DbContext
+{
+
     public class FoodApplicationDbContext : DbContext
     {
-
-        public FoodApplicationDbContext(DbContextOptions<FoodApplicationDbContext> options = null) : base(options)
+        public FoodApplicationDbContext(DbContextOptions<FoodApplicationDbContext> options)
+            : base(options)
         {
-
-
         }
 
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Address> CustomersAddress { get; set; }
-        public DbSet<List> Foods { get; set; }
-        public DbSet<DeliverySystem> Deliveries { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<DeliverySystem> DeliverySystems { get; set; }
+        public DbSet<FoodItem> FoodItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
 
-            builder.ApplyConfiguration(new Configuration.CustomerConfig());
-            builder.ApplyConfiguration(new Configuration.AddressConfig());
-            builder.ApplyConfiguration(new Configuration.DeliverySystemConfig());
+            builder.ApplyConfigurationsFromAssembly(
+                typeof(FoodApplicationDbContext).Assembly);
         }
     }
+
+}

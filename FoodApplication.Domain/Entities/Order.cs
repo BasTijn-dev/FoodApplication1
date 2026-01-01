@@ -9,7 +9,7 @@ namespace FoodApplication.Domain.Entities
     public class Order : Audit
     {
         public string CustomerName { get; set; }
-        public ICollection<List> FoodList { get; set; }
-        public DeliverySystem DeliveryId{get;set; } 
+        public Customer Customer  { get; set; }
+        public DeliverySystem DeliverySystem{get;set; } 
     }
 }

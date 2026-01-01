@@ -12,7 +12,8 @@ namespace FoodApplication.Domain.Entities
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
-        public Customer CustomerId { get; set; }
+        public Guid CustomerId { get; set; }
+        public Customer Customer { get; set; }
         
     }
 }

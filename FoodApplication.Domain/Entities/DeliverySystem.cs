@@ -9,13 +9,15 @@ namespace FoodApplication.Domain.Entities
     public class DeliverySystem : Audit
     {
         public string DispatchRiderName { get; set; }
-        public string DispatchRiderPhoneNumber { get; set; }
-        public Order FoodOrders { get; set; }
         public DateTime DeliveryDate { get; set; }
-        public DeliveryStatus Status { get; set; }
+        public string Status { get; set; }
+
+        public Guid OrderId { get; set; }
+        public Order Order { get; set; }
     }
 
-        public enum DeliveryStatus 
+
+    public enum DeliveryStatus 
         {
             Accepted,
             Declined,

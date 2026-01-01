@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FoodApplication.Domain.Entities;
+﻿using FoodApplication.Domain.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodAplication.Infrastructure.Configuration
 {
-    public class TheCustomerAddressConfig : BaseConfig<Address>
+    public class AddressConfig : BaseConfig<Address>
     {
-        public override void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Address> builder)
+        public override void Configure(EntityTypeBuilder<Address> builder)
         {
             base.Configure(builder);
-            builder.Property(c => c.CustomerAddress).IsRequired().HasMaxLength(100);
-            builder.Property(c => c.City).IsRequired().HasMaxLength(180);
-            builder.Property(c => c.State).IsRequired().HasMaxLength(180);
-            builder.Property(c => c.Country).IsRequired().HasMaxLength(180);
-            builder.HasOne(a => a.CustomerId)
-                .WithOne(a => a.CustomerAddressId)
-                .HasForeignKey<FoodApplication.Domain.Entities.Address>(a => a.Id)
-                .OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade);
+
+            builder.Property(a => a.CustomerAddress).IsRequired().HasMaxLength(100);
+            builder.Property(a => a.City).IsRequired().HasMaxLength(150);
+            builder.Property(a => a.State).IsRequired().HasMaxLength(150);
+            builder.Property(a => a.Country).IsRequired().HasMaxLength(150);
+
+            builder.HasOne(a => a.Customer)
+                   .WithMany(c => c.Addresses)
+                   .HasForeignKey(a => a.CustomerId);
         }
     }
+
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FoodApplication.Domain.Entities;
+﻿using FoodApplication.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,12 +8,17 @@ namespace FoodAplication.Infrastructure.Configuration
     {
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
-            builder.Property(c => c.Id).ValueGeneratedOnAdd();
-            builder.Property(c => c.CreatedOn).IsRequired();
-            builder.HasQueryFilter(c => !c.IsDelete);
+            builder.HasKey(e => e.Id); // Primary key
+
+            builder.Property(e => e.CreatedOn)
+                   .HasDefaultValueSql("GETUTCDATE()")
+                   .IsRequired();
+
+            builder.Property(e => e.IsDeleted)
+                   .HasDefaultValue(false);
+
+            builder.HasQueryFilter(e => !e.IsDeleted); // Soft delete filter
         }
-
-
-
     }
+
 }
