@@ -1,11 +1,9 @@
 ﻿using FoodApplication.Domain.Entities;
-using FoodApplication.Domain.Entities.FoodApplication.Domain.Entities;
+using FoodApplication.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace FoodAplication.Infrastructure.DbContexts;
 
-public class FoodApplicationDbContext : DbContext
-{
 
     public class FoodApplicationDbContext : DbContext
     {
@@ -29,4 +27,4 @@ public class FoodApplicationDbContext : DbContext
         }
     }
 
-}
+

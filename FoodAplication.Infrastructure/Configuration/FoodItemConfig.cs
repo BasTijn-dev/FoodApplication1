@@ -1,14 +1,7 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FoodAplication.Infrastructure.Configuration;
 using FoodApplication.Domain.Entities;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using FoodAplication.Infrastructure.Configuration;
-using FoodApplication.Domain.Entities.FoodApplication.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FoodApplication.Infrastructure.Configuration
 {

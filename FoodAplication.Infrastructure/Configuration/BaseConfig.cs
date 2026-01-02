@@ -8,7 +8,7 @@ namespace FoodAplication.Infrastructure.Configuration
     {
         public virtual void Configure(EntityTypeBuilder<T> builder)
         {
-            builder.HasKey(e => e.Id); // Primary key
+            builder.HasKey(e => e.Id); 
 
             builder.Property(e => e.CreatedOn)
                    .HasDefaultValueSql("GETUTCDATE()")
@@ -17,7 +17,7 @@ namespace FoodAplication.Infrastructure.Configuration
             builder.Property(e => e.IsDeleted)
                    .HasDefaultValue(false);
 
-            builder.HasQueryFilter(e => !e.IsDeleted); // Soft delete filter
+            builder.HasQueryFilter(e => !e.IsDeleted); 
         }
     }
 
